@@ -1,5 +1,11 @@
-const baseURL = 'mapbox://styles/walterj/ckaeqw8uo1oxr1imr8dj4ce5j'
-const mapbox_token = 'pk.eyJ1Ijoid2FsdGVyaiIsImEiOiJjazZ0cjZ5M2gwMGxrM21zMmt4Z3p4OWNlIn0.7no-7gXBw5azPXlETiK05A';
+const baseURL = () => {
+    return 'mapbox://styles/walterj/ckaeqw8uo1oxr1imr8dj4ce5j';
+};
+
+const mbToken = () => {
+    return 'pk.eyJ1Ijoid2FsdGVyaiIsImEiOiJja2FobWU4dTMwMnR4MnNudWlicmtpc2xkIn0.nAPmnPgkjTXOT808EenEsA';
+} 
+    
 
 
-export {baseURL,mapbox_token}
+export {baseURL,mbToken}

@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.css';
-import * as p from 'private';
+import {mbToken} from './private';
 import mapboxgl from 'mapbox-gl';
 import Pbf from 'pbf';
 import {FeedMessage} from './gtfs-realtime.browser.proto.js';
 
 
 
-mapboxgl.accessToken = 'pk.eyJ1Ijoid2FsdGVyaiIsImEiOiJjazZ0ZG1jdDQwY3RsM2twYzN2ano1aGFoIn0.6lrMN3Su3GZGoO8uAIyiwQ'
+mapboxgl.accessToken = mbToken();
 
 class BackgroundMap extends React.Component {
   // Code from the next few steps will go here
@@ -23,7 +23,7 @@ class BackgroundMap extends React.Component {
     componentDidMount() {
 
 		// https://grffe.com/proxy/proxy.php?
-		var pburl = "https://grffe.com/proxy/proxy.php?https://www.metrostlouis.org/RealTimeData/StlRealTimeVehicles.pb?cacheBust=";
+		var pburl = "https://www.metrostlouis.org/RealTimeData/StlRealTimeVehicles.pb?cacheBust=";
 		let vehLocations;
 
 		// start of Gavin's code for processing protocol buffer information
