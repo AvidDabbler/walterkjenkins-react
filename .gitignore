@@ -106,3 +106,4 @@ dist
 
 CUSTOM
 src/private.js
+src/cors.js
