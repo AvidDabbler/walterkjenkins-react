@@ -1,13 +1,11 @@
 import React from 'react';
+import 'mapbox-gl/dist/mapbox-gl.css';
 import './App.css';
 import {mbToken} from './private';
 import mapboxgl from 'mapbox-gl';
 import Pbf from 'pbf';
 import { FeedMessage } from './gtfs-realtime.browser.proto.js';
 import cors_vehicles from './cors';
-// import express from 'express';
-// import cors from 'cors';
-// import bodyparser from 'body-parser';
 
 
 // !!! NOTES !!!
@@ -27,7 +25,14 @@ class BackgroundMap extends React.Component {
 			lat: 38.6447868,
 			zoom: 10.9,
 		};
-		}
+	}
+	
+	updateDimensions() {
+		let update_width  = window.innerWidth;
+		let update_height = window.innerHeight;
+		this.setState({ width: update_width, height: update_height });
+
+	  }
 	
     componentDidMount() {
 
@@ -61,9 +66,11 @@ class BackgroundMap extends React.Component {
 		zoom: this.state.zoom
 		});
 
+		this.updateDimensions();
+		window.addEventListener("resize", this.updateDimensions);
+
 		protobufUpdate()
 			.then(data => {
-			console.log(data)
 			data.forEach(function(marker) {
 
 				// create a HTML element for each feature
@@ -74,31 +81,37 @@ class BackgroundMap extends React.Component {
 					marker.vehicle.position.longitude,
 					marker.vehicle.position.latitude,
 				];
-
-				console.log(coord)
 			  
 				// make a marker for each feature and add to the map
 				// styling -> https://docs.mapbox.com/mapbox-gl-js/example/data-driven-circle-colors/
 				new mapboxgl.Marker(el)
 					.setLngLat(coord)
 					.addTo(map);
-				
-				console.log()
+
 			  });
-		})
+			})
+
 	}
-	
+
+	componentWillUnmount() {
+		window.removeEventListener("resize", this.updateDimensions.bind(this));
+	  }
 	
 
     render() {
 		
 		return (
-			<div>
-				<div ref={el => this.mapContainer = el} className="mapContainer" />
-			</div>
+			<div id='map'
+				ref={el => this.mapContainer = el}
+				className="mapContainer"
+				width={this.state.width}
+				height={this.state.height}
+			/>
       )
     }
-  }
+}
+  
+
 
 
 export { BackgroundMap };
