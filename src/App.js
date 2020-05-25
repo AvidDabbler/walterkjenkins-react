@@ -23,8 +23,32 @@ const setWindowSize = () => {
 mapboxgl.accessToken = mbToken();
 var pburl = "https://www.metrostlouis.org/RealTimeData/StlRealTimeVehicles.pb?cacheBust=" + new Date().time;
 
+const geoData = (d) => {
+	let geoJson = {};
+	geoJson['type'] = 'FeatureCollection'
+	geoJson['features'] = [];
+
+	d.forEach(el => {
+		let feature = {};
+
+		feature['type'] = 'Feature';
+		// reorganize geometry sections
+		feature['geometry'] = {};
+		feature['geometry']['type'] = 'Point';
+		feature['geometry']['coordinates'] = [el.vehicle.position.longitude, el.vehicle.position.latitude,];
+
+		// set up id in properties
+		feature['properties'] = {};
+		feature['properties']['id'] = el.vehicle.vehicle.id;
+
+		geoJson['features'].push(feature);
+	});
+
+	return geoJson;
+}
+
 const protobufUpdate = async () => {
-	const url = cors_vehicles(pburl)
+	const url = cors_vehicles(pburl);
 	console.log(url);
 	let response = await fetch(url)
 	if (response.ok) {
@@ -33,11 +57,13 @@ const protobufUpdate = async () => {
 		const bufferRes = await response.arrayBuffer();
 		const pbf = new Pbf(new Uint8Array(bufferRes));
 		const obj = FeedMessage.read(pbf);
-		return obj.entity;
+		return geoData(obj.entity);
 	} else {
 		console.error("error: ", response.status);
 	}
 };
+
+
 
 class BackgroundMap extends React.Component {
 	// Code from the next few steps will go here
@@ -63,24 +89,37 @@ class BackgroundMap extends React.Component {
 
 		protobufUpdate()
 			.then(data => {
-				this.setState(data => {
-					mapData: data
-				}, () => console.log(this.state))
+				console.log(data)
+				this.setState({mapData: data}, () => console.log(this.state))
 				return data;
 				// make a marker for each feature and add to the map
 				// styling -> https://docs.mapbox.com/mapbox-gl-js/example/data-driven-circle-colors/
 				
-			}).then(mapData => {
-				mapData.map(md => {
-					let coord = [
-						md.vehicle.position.longitude,
-						md.vehicle.position.latitude,
-					]
-					let mark = new mapboxgl.Marker(document.getElementById('mapContainer'))
-						.setLngLat(coord)
-						.addTo(map);
-					mark.options.color('#28801c')
+			}).then(geoJson => {
+				// geoJson.map(md => {
+				// 	let coord = [
+				// 		md.vehicle.position.longitude,
+				// 		md.vehicle.position.latitude,
+				// 	]
+				// 	let mark = new mapboxgl.Marker(document.getElementById('mapContainer'))
+				// 		.setLngLat(coord)
+				// 		.addTo(map);
+				// 	mark.options.color('#28801c')
+				
+				map.on('load', () => {
+					map.addSource('points', {
+						'type': 'geojson',
+						'data': geoJson,
+					})
+					map.addLayer({
+						'id': 'points',
+						'type': 'circle',
+						'source': 'points',
+
+					});
+					
 				})
+				// })
 
 			})
 
