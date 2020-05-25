@@ -12,9 +12,32 @@ import cors_vehicles from './cors';
 // preprocessing .proto files and working with pbf -> https://gavinr.com/protocol-buffers-protobuf-browser/
 // processing cors errors -> https://daveceddia.com/access-control-allow-origin-cors-errors-in-react-express/
 
-
+const setWindowSize = () => {
+    var windowHeight = window.innerHeight;
+    var windowWidth = window.innerWidth;
+    document.getElementById('root').style.height = windowHeight + "px";
+    document.getElementById('root').style.width = windowWidth + "px";
+    console.log(document.getElementById('root').style.width);
+}
 
 mapboxgl.accessToken = mbToken();
+var pburl = "https://www.metrostlouis.org/RealTimeData/StlRealTimeVehicles.pb?cacheBust=" + new Date().time;
+
+const protobufUpdate = async () => {
+	const url = cors_vehicles(pburl)
+	console.log(url);
+	let response = await fetch(url)
+	if (response.ok) {
+		// if HTTP-status is 200-299
+		// get the response body (the method explained below)
+		const bufferRes = await response.arrayBuffer();
+		const pbf = new Pbf(new Uint8Array(bufferRes));
+		const obj = FeedMessage.read(pbf);
+		return obj.entity;
+	} else {
+		console.error("error: ", response.status);
+	}
+};
 
 class BackgroundMap extends React.Component {
 	// Code from the next few steps will go here
@@ -27,36 +50,7 @@ class BackgroundMap extends React.Component {
 		};
 	}
 	
-	updateDimensions() {
-		let update_width  = window.innerWidth;
-		let update_height = window.innerHeight;
-		this.setState({ width: update_width, height: update_height });
-
-	  }
-	
     componentDidMount() {
-
-		let vehLocations;
-		var pburl = "https://www.metrostlouis.org/RealTimeData/StlRealTimeVehicles.pb?cacheBust=" + new Date().time;
-
-
-		const protobufUpdate = async () => {
-			const url = cors_vehicles(pburl)
-			console.log(url);
-			let response = await fetch(url)
-			if (response.ok) {
-				// if HTTP-status is 200-299
-				// get the response body (the method explained below)
-				const bufferRes = await response.arrayBuffer();
-				const pbf = new Pbf(new Uint8Array(bufferRes));
-				const obj = FeedMessage.read(pbf);
-				return obj.entity;
-			} else {
-				console.error("error: ", response.status);
-			}
-		};
-
-		
 
 		// start of Gavin's code for processing protocol buffer information
 		const map = new mapboxgl.Map({
@@ -66,40 +60,41 @@ class BackgroundMap extends React.Component {
 		zoom: this.state.zoom
 		});
 
-		this.updateDimensions();
-		window.addEventListener("resize", this.updateDimensions);
 
 		protobufUpdate()
 			.then(data => {
-			data.forEach(function(marker) {
-
-				// create a HTML element for each feature
-				var el = document.createElement('div');
-				el.className = 'marker';
-
-				let coord = [
-					marker.vehicle.position.longitude,
-					marker.vehicle.position.latitude,
-				];
-			  
+				this.setState(data => {
+					mapData: data
+				}, () => console.log(this.state))
+				return data;
 				// make a marker for each feature and add to the map
 				// styling -> https://docs.mapbox.com/mapbox-gl-js/example/data-driven-circle-colors/
-				new mapboxgl.Marker(el)
-					.setLngLat(coord)
-					.addTo(map);
+				
+			}).then(mapData => {
+				mapData.map(md => {
+					let coord = [
+						md.vehicle.position.longitude,
+						md.vehicle.position.latitude,
+					]
+					let mark = new mapboxgl.Marker(document.getElementById('mapContainer'))
+						.setLngLat(coord)
+						.addTo(map);
+					mark.options.color('#28801c')
+				})
 
-			  });
 			})
 
 	}
 
-	componentWillUnmount() {
-		window.removeEventListener("resize", this.updateDimensions.bind(this));
-	  }
-	
+	thingThatHasATimeout() {
+		console.log('thing');
+	}
 
     render() {
-		
+		// setWindowSize();
+		// window.addEventListener("resize",setWindowSize,false);
+		this.thingThatHasATimeout();
+
 		return (
 			<div id='map'
 				ref={el => this.mapContainer = el}
