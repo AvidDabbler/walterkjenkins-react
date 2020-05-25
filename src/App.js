@@ -23,6 +23,9 @@ const setWindowSize = () => {
 mapboxgl.accessToken = mbToken();
 var pburl = "https://www.metrostlouis.org/RealTimeData/StlRealTimeVehicles.pb?cacheBust=" + new Date().time;
 
+
+// converts data to geojson
+// mapbox example: https://docs.mapbox.com/help/data/stations.geojson
 const geoData = (d) => {
 	let geoJson = {};
 	geoJson['type'] = 'FeatureCollection'
