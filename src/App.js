@@ -75,12 +75,12 @@ class BackgroundMap extends React.Component {
 			zoom: this.state.zoom
 		}
 		this.map =	new mapboxgl.Map(mapOptions);
-		this.getAndLoad()
+		this.getAndLoad();
+		
 
 
 	};
 
-	time = () => `${new Date().time}` 
 	
 		
 	// start of helper functions
@@ -93,6 +93,7 @@ class BackgroundMap extends React.Component {
 			const bufferRes = await response.arrayBuffer();
 			const pbf = new Pbf(new Uint8Array(bufferRes));
 			const obj = FeedMessage.read(pbf);
+			console.log(obj.entity)
 			return geoData(obj.entity);
 		} else {
 			console.error("error: ", response.status);
@@ -101,8 +102,8 @@ class BackgroundMap extends React.Component {
 
 	addSource = (geoJson) => {
 		const map = this.map;
-		this.setState({ newTime: this.time()})
-		map.addSource(`${this.state.newTime}`, {
+		console.log(this.state);
+		map.addSource(`vehicles`, {
 			'type': 'geojson',
 			'data': geoJson,
 		})
@@ -111,30 +112,20 @@ class BackgroundMap extends React.Component {
 	addLayer = () => {
 		const map = this.map;
 		map.addLayer({
-			'id': this.state.newTime,
+			'id': 'vehicles',
 			'type': 'circle',
-			'source': this.state.newTime,
+			'source': 'vehicles',
 			
 		});
 	}
 	// end of helper functions
-
-
+	
+	
 	// start of builder functions
 	loadData = async (geoJson) => {
 		// if it is the first time the page is loaded
-		if (!this.state.activeTime) {
-				this.addSource(geoJson);
-				this.addLayer();
-				this.setState({ activeTime: this.state.newTime})
-
-		// runs if there is already an active layer on the map
-		} else {
-			this.addSource();
-			this.removeLayer(this.state.activeTime);
-			this.addLayer();
-			this.setState({ activeTime: this.state.newTime })
-		}
+		this.addSource(geoJson);
+		this.addLayer();
 	};
 
 	// ! this function should be run on an interval
@@ -142,8 +133,17 @@ class BackgroundMap extends React.Component {
 		this.getData()
 			.then(geoJson => {
 				this.loadData(geoJson);
-			});
+			}).then(data => {
+				setInterval(() => this.updateData(), 15000)
+			})
 	};
+
+	updateData = () => {
+		const map = this.map;
+		this.getData().then(data => {
+			map.getSource('vehicles').setData(data)
+		})
+	}
 	// end of builder functions
 
     render() {
