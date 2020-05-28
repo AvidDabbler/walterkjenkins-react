@@ -6,19 +6,18 @@ import mapboxgl from 'mapbox-gl';
 import Pbf from 'pbf';
 import { FeedMessage } from './gtfs-realtime.browser.proto.js';
 import cors_vehicles from './cors';
+import { getByPlaceholderText } from '@testing-library/react';
 
 
 // !!! NOTES !!!
 // preprocessing .proto files and working with pbf -> https://gavinr.com/protocol-buffers-protobuf-browser/
 // processing cors errors -> https://daveceddia.com/access-control-allow-origin-cors-errors-in-react-express/
 
-const setWindowSize = () => {
-    var windowHeight = window.innerHeight;
-    var windowWidth = window.innerWidth;
-    document.getElementById('root').style.height = windowHeight + "px";
-    document.getElementById('root').style.width = windowWidth + "px";
-    console.log(document.getElementById('root').style.width);
-}
+// todo: set up interval to refetch
+	// todo: have to set up add
+// todo: add in header
+// todo: figure out how to pan and zoom on click
+// todo: disable pan and zoom
 
 mapboxgl.accessToken = mbToken();
 var pburl = "https://www.metrostlouis.org/RealTimeData/StlRealTimeVehicles.pb?cacheBust=" + new Date().time;
@@ -50,92 +49,104 @@ const geoData = (d) => {
 	return geoJson;
 }
 
-const protobufUpdate = async () => {
-	const url = cors_vehicles(pburl);
-	console.log(url);
-	let response = await fetch(url)
-	if (response.ok) {
-		// if HTTP-status is 200-299
-		// get the response body (the method explained below)
-		const bufferRes = await response.arrayBuffer();
-		const pbf = new Pbf(new Uint8Array(bufferRes));
-		const obj = FeedMessage.read(pbf);
-		return geoData(obj.entity);
-	} else {
-		console.error("error: ", response.status);
-	}
-};
-
 
 
 class BackgroundMap extends React.Component {
-	// Code from the next few steps will go here
 	constructor(props) {
 		super(props);
 		this.state = {
 			lng: -90.280318,
 			lat: 38.6447868,
 			zoom: 10.9,
+			map: []
 		};
-	}
+
+		}
+		// activeTime: string id associated with the active vehicle layer
+		// newTime: string id associated with the data that is being processed
+		// mapData: array of geoJson objects that hold the vehicle location data
 	
-    componentDidMount() {
+	// initialize the map
+	componentDidMount() {
+		const mapOptions = {
+			container: this.mapContainer,
+			style: 'mapbox://styles/walterj/ckaer3czj1a6o1iqjjp5xy5dm',
+			center: [this.state.lng, this.state.lat],
+			zoom: this.state.zoom
+		}
+		this.map =	new mapboxgl.Map(mapOptions);
+		this.getAndLoad()
 
-		// start of Gavin's code for processing protocol buffer information
-		const map = new mapboxgl.Map({
-		container: this.mapContainer,
-		style: 'mapbox://styles/walterj/ckaer3czj1a6o1iqjjp5xy5dm',
-		center: [this.state.lng, this.state.lat],
-		zoom: this.state.zoom
+
+	};
+
+	time = () => `${new Date().time}` 
+	
+		
+	// start of helper functions
+	getData = async () => {
+		const url = cors_vehicles(pburl);
+		let response = await fetch(url)
+		if (response.ok) {
+			// if HTTP-status is 200-299
+			// get the response body (the method explained below)
+			const bufferRes = await response.arrayBuffer();
+			const pbf = new Pbf(new Uint8Array(bufferRes));
+			const obj = FeedMessage.read(pbf);
+			return geoData(obj.entity);
+		} else {
+			console.error("error: ", response.status);
+		}
+	};
+
+	addSource = (geoJson) => {
+		const map = this.map;
+		this.setState({ newTime: this.time()})
+		map.addSource(`${this.state.newTime}`, {
+			'type': 'geojson',
+			'data': geoJson,
+		})
+	}
+
+	addLayer = () => {
+		const map = this.map;
+		map.addLayer({
+			'id': this.state.newTime,
+			'type': 'circle',
+			'source': this.state.newTime,
+			
 		});
-
-
-		protobufUpdate()
-			.then(data => {
-				console.log(data)
-				this.setState({mapData: data}, () => console.log(this.state))
-				return data;
-				// make a marker for each feature and add to the map
-				// styling -> https://docs.mapbox.com/mapbox-gl-js/example/data-driven-circle-colors/
-				
-			}).then(geoJson => {
-				// geoJson.map(md => {
-				// 	let coord = [
-				// 		md.vehicle.position.longitude,
-				// 		md.vehicle.position.latitude,
-				// 	]
-				// 	let mark = new mapboxgl.Marker(document.getElementById('mapContainer'))
-				// 		.setLngLat(coord)
-				// 		.addTo(map);
-				// 	mark.options.color('#28801c')
-				
-				map.on('load', () => {
-					map.addSource('points', {
-						'type': 'geojson',
-						'data': geoJson,
-					})
-					map.addLayer({
-						'id': 'points',
-						'type': 'circle',
-						'source': 'points',
-
-					});
-					
-				})
-				// })
-
-			})
-
 	}
+	// end of helper functions
 
-	thingThatHasATimeout() {
-		console.log('thing');
-	}
+
+	// start of builder functions
+	loadData = async (geoJson) => {
+		// if it is the first time the page is loaded
+		if (!this.state.activeTime) {
+				this.addSource(geoJson);
+				this.addLayer();
+				this.setState({ activeTime: this.state.newTime})
+
+		// runs if there is already an active layer on the map
+		} else {
+			this.addSource();
+			this.removeLayer(this.state.activeTime);
+			this.addLayer();
+			this.setState({ activeTime: this.state.newTime })
+		}
+	};
+
+	// ! this function should be run on an interval
+	getAndLoad = async () => {
+		this.getData()
+			.then(geoJson => {
+				this.loadData(geoJson);
+			});
+	};
+	// end of builder functions
 
     render() {
-		// setWindowSize();
-		// window.addEventListener("resize",setWindowSize,false);
-		this.thingThatHasATimeout();
 
 		return (
 			<div id='map'
@@ -145,10 +156,17 @@ class BackgroundMap extends React.Component {
 				height={this.state.height}
 			/>
       )
-    }
-}
+	};
+};
   
 
-
+class Head extends React.Component {
+	render() {
+		return (
+			<div id='head'>
+			
+			</div>)
+	}
+};
 
 export { BackgroundMap };
