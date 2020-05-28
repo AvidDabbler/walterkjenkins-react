@@ -6,15 +6,14 @@ import mapboxgl from 'mapbox-gl';
 import Pbf from 'pbf';
 import { FeedMessage } from './gtfs-realtime.browser.proto.js';
 import cors_vehicles from './cors';
-import { getByPlaceholderText } from '@testing-library/react';
 
 
 // !!! NOTES !!!
 // preprocessing .proto files and working with pbf -> https://gavinr.com/protocol-buffers-protobuf-browser/
 // processing cors errors -> https://daveceddia.com/access-control-allow-origin-cors-errors-in-react-express/
 
-// todo: set up interval to refetch
-	// todo: have to set up add
+// // todo: set up interval to refetch
+	// // todo: have to set up add every 15 seconds
 // todo: add in header
 // todo: figure out how to pan and zoom on click
 // todo: disable pan and zoom
