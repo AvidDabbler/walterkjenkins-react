@@ -152,9 +152,8 @@ class BackgroundMap extends React.Component {
 			ref={el => this.mapContainer = el}
 			className="mapContainer h80 w-100"
 			width={this.state.width}
-			height={this.state.height}
-			>
-			<div id="title">{this.props.children}</div></div>
+			height={this.state.height}>
+			</div>
       )
 	};
 };
@@ -162,14 +161,14 @@ class BackgroundMap extends React.Component {
 class Header extends React.Component {
 	render() {
 		return(
-			<div id="head" class="op80 h70 w-100 zi100">
-			<div class="text mt4" id="navbar">
-				<nav class='helvetica tc pb3'>  
-					<a class='link orange gray mh5' data-value="blog" href="https://blog.walterkjenkins.com">Blog</a>
-					<a class='link orange dim gray f6 f5-ns dib mh5' data-value="contact" href="#contact">Contact</a>
-					<a class='link orange dim gray f6 f5-ns dib mh5' data-value="portfolio"href="#portfolio">Portfolio</a>    
-				</nav>
-			</div>
+			<div id="head" class="op80 w-100 zi100 inlineext pa0 inline w-100 pv2 v-mid">
+				<div id="title" className="relative ht pa0 fl"><h1>Walter Jenkins</h1></div>
+
+					<nav class='helvetica pv3 ph2 tc fr ph3'>  
+						<a class='link orange gray mh3 f6' data-value="blog" href="https://blog.walterkjenkins.com">Blog</a>
+						<a class='link orange gray mh3 f6' data-value="contact" href="#contact">Contact</a>
+						<a class='link orange gray mh3 f6' data-value="portfolio"href="#portfolio">Portfolio</a>    
+					</nav>
 			</div>
 		)
 	}
@@ -177,11 +176,11 @@ class Header extends React.Component {
 
 const App = () => (
 		<div id="app" className="w-100">
-			<div className="h80 w-100 zi100">
-				<Header className="h70 w-100" />
+			<div className=" w-100 zi100">
+				<Header className="h60 w-100" />
 			</div>
 			<div id="map" className="mapContainer w-100">
-				<BackgroundMap className="mapContainer w-100"/>
+				<BackgroundMap className="mapContainer w-100"><h1 >Walter Jenkins</h1></BackgroundMap>/>
 			</div>
 		</div>)
 
