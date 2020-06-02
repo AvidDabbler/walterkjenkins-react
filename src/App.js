@@ -180,7 +180,7 @@ const App = () => (
 				<Header className="h60 w-100" />
 			</div>
 			<div id="map" className="mapContainer w-100">
-				<BackgroundMap className="mapContainer w-100"><h1 >Walter Jenkins</h1></BackgroundMap>/>
+				<BackgroundMap className="mapContainer w-100"></BackgroundMap>
 			</div>
 		</div>)
 
