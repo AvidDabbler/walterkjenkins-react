@@ -1,3 +1,10 @@
+:root{
+  --light-blue: #427aa1;
+  --white: #ebf2fa;
+  --medium-blue: #1d3461;
+  --orange: #f06543;
+  --dark-blue: #0a122a
+}
 #root {
   height: 100vh;
   width: 100vw;
@@ -11,12 +18,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
 body {
   margin: 0;
   padding: 0;
@@ -24,15 +29,55 @@ body {
 
 html,
 body,
-#app,
-#app > div {
+#app {
   height: 100%;
 }
-#root,
-#map {
+#root, #head {
   position: absolute;
-  width: 100%;
-  height: 100%;
+}
+#head, #foot {
+  position: absolute;
+  background-color: #427aa1;
+}
+.op80 {
+  opacity: 80%;
+}
+.h70{
+  height: 70px;
+}
+.zi99{
+  z-index: 99;
+}
+.zi100{
+  z-index: 100;
+}
+.ht h1{
+  font-family: 'Pacifico', cursive;
+  padding: 0 0 0 20px;
+  margin: 0;
+  font-size: 40px;
+  color: var(--orange);
+  opacity: 100%;
+  color: var(--orange);
+  text-shadow: -2px -2px 0 #213D50, 2px -2px 0 #213D50, -2px 2px 0 #213D50, 2px 2px 0 #213D50;
+}
+
+.heading{
+  position: absolute;
+  width: 97%;
+  z-index:10;
+  margin-top:20%;
+}
+.sub-heading{
+  position: absolute;
+  padding-left: 5%;
+  width:70%;
+  float: left;
+  z-index:30;
+  margin-top:30%;
+}
+.foot{
+  bottom: 0;
 }
 
 body,
@@ -44,11 +89,7 @@ body,
   height: 100%;
   height: 100%;
 }
-
-.marker {
-  background-size: cover;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: red;
+#title {
+  background-color: transparent;
+  z-index: 10000;
 }

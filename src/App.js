@@ -79,7 +79,6 @@ class BackgroundMap extends React.Component {
 
 
 	};
-
 	
 		
 	// start of helper functions
@@ -92,7 +91,7 @@ class BackgroundMap extends React.Component {
 			const bufferRes = await response.arrayBuffer();
 			const pbf = new Pbf(new Uint8Array(bufferRes));
 			const obj = FeedMessage.read(pbf);
-			console.log(obj.entity)
+			console.log(new Date())
 			return geoData(obj.entity);
 		} else {
 			console.error("error: ", response.status);
@@ -121,51 +120,69 @@ class BackgroundMap extends React.Component {
 	
 	
 	// start of builder functions
-	loadData = async (geoJson) => {
+	loadData = (geoJson) => {
 		// if it is the first time the page is loaded
 		this.addSource(geoJson);
 		this.addLayer();
 	};
 
 	// ! this function should be run on an interval
-	getAndLoad = async () => {
-		this.getData()
-			.then(geoJson => {
-				this.loadData(geoJson);
-			}).then(data => {
-				setInterval(() => this.updateData(), 15000)
-			})
-	};
-
+	
 	updateData = () => {
 		const map = this.map;
 		this.getData().then(data => {
 			map.getSource('vehicles').setData(data)
 		})
 	}
+	
+	getAndLoad = () => {
+		this.getData()
+			.then(geoJson => {
+				this.loadData(geoJson);
+			}).then(data => {
+				setInterval(() => this.updateData(), 5000)
+			})
+	};
 	// end of builder functions
 
     render() {
 
 		return (
 			<div id='map'
-				ref={el => this.mapContainer = el}
-				className="mapContainer"
-				width={this.state.width}
-				height={this.state.height}
-			/>
+			ref={el => this.mapContainer = el}
+			className="mapContainer h80 w-100"
+			width={this.state.width}
+			height={this.state.height}
+			>
+			<div id="title">{this.props.children}</div></div>
       )
 	};
 };
-  
 
-class Head extends React.Component {
+class Header extends React.Component {
 	render() {
-		return (
-			<div id='head'>
-			
-			</div>)
+		return(
+			<div id="head" class="op80 h70 w-100 zi100">
+			<div class="text mt4" id="navbar">
+				<nav class='helvetica tc pb3'>  
+					<a class='link orange gray mh5' data-value="blog" href="https://blog.walterkjenkins.com">Blog</a>
+					<a class='link orange dim gray f6 f5-ns dib mh5' data-value="contact" href="#contact">Contact</a>
+					<a class='link orange dim gray f6 f5-ns dib mh5' data-value="portfolio"href="#portfolio">Portfolio</a>    
+				</nav>
+			</div>
+			</div>
+		)
 	}
 };
 
-export { BackgroundMap };
+const App = () => (
+		<div id="app" className="w-100">
+			<div className="h80 w-100 zi100">
+				<Header className="h70 w-100" />
+			</div>
+			<div id="map" className="mapContainer w-100">
+				<BackgroundMap className="mapContainer w-100"/>
+			</div>
+		</div>)
+
+export default App;
