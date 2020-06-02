@@ -80,7 +80,6 @@ class BackgroundMap extends React.Component {
 
 	};
 	
-		
 	// start of helper functions
 	getData = async () => {
 		const url = cors_vehicles(pburl);
@@ -113,7 +112,11 @@ class BackgroundMap extends React.Component {
 			'id': 'vehicles',
 			'type': 'circle',
 			'source': 'vehicles',
-			
+			'paint': {
+				'circle-color': '#427aa1',
+				'circle-radius': 2.5
+
+			}
 		});
 	}
 	// end of helper functions
@@ -180,7 +183,7 @@ const App = () => (
 				<Header className="h60 w-100" />
 			</div>
 			<div id="map" className="mapContainer w-100">
-				<BackgroundMap className="mapContainer w-100"></BackgroundMap>
+				<BackgroundMap className="mapContainer w-100" />
 			</div>
 		</div>)
 
