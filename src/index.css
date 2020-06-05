@@ -37,10 +37,7 @@ body,
 }
 #head, #foot {
   position: absolute;
-  background-color: #427aa1;
-}
-.op80 {
-  opacity: 80%;
+  background-color: rgba(26, 48, 63, 0.8);
 }
 .h60{
   height: 60px;

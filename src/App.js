@@ -5,7 +5,8 @@ import {mbToken} from './private';
 import mapboxgl from 'mapbox-gl';
 import Pbf from 'pbf';
 import { FeedMessage } from './gtfs-realtime.browser.proto.js';
-import cors_vehicles from './cors';
+import {cors} from './cors';
+import githubData from './github';
 
 
 // !!! NOTES !!!
@@ -69,20 +70,19 @@ class BackgroundMap extends React.Component {
 	componentDidMount() {
 		const mapOptions = {
 			container: this.mapContainer,
-			style: 'mapbox://styles/walterj/ckaer3czj1a6o1iqjjp5xy5dm',
+			style: 'mapbox://styles/walterj/ckb1lvnmk06y11ilx1sf3uctj',
 			center: [this.state.lng, this.state.lat],
 			zoom: this.state.zoom
 		}
-		this.map =	new mapboxgl.Map(mapOptions);
-		this.getAndLoad();
-		
-
+		this.map = new mapboxgl.Map(mapOptions);
+		this.getAndLoad();	
+		githubData();
 
 	};
 	
 	// start of helper functions
 	getData = async () => {
-		const url = cors_vehicles(pburl);
+		const url = cors(pburl);
 		let response = await fetch(url)
 		if (response.ok) {
 			// if HTTP-status is 200-299
@@ -113,8 +113,8 @@ class BackgroundMap extends React.Component {
 			'type': 'circle',
 			'source': 'vehicles',
 			'paint': {
-				'circle-color': '#427aa1',
-				'circle-radius': 2.5
+				'circle-color': '#f06543',
+				'circle-radius': 2.8
 
 			}
 		});
@@ -176,6 +176,34 @@ class Header extends React.Component {
 		)
 	}
 };
+  
+class HeroMenu extends React.Component {
+	element = (item) => (
+		<div id='{item}'>
+			<img id='{item}Icon' class='flex center' src='assets/{item}.svg' alt='{item}'></img>
+		</div>
+	);
+
+	list = ['data', 'maps', 'tools'];
+
+	render() {
+
+		return (
+			<div id='hero-menu' class='w-70 center flex'>
+
+				{/* <div id='data' class='w-30 center flex bg-blue'>
+					<img id='dataIcon' class='flex center' src='assets/data.svg' alt='data'></img>
+				</div>
+				<div id='maps' class='w-30 center flex'>
+					<img id='mapsIcon' class='flex center'  src='assets/maps.svg' alt='maps'></img>
+				</div>
+				<div id='tools' class='w-30 center flex'>
+					<img id='toolsIcon' class='flex center'  src='./assets/tools.svg' alt='tools'></img>
+				</div> */}
+			</div>
+		)
+	}
+}
 
 const App = () => (
 		<div id="app" className="w-100">
@@ -183,8 +211,9 @@ const App = () => (
 				<Header className="h60 w-100" />
 			</div>
 			<div id="map" className="mapContainer w-100">
-				<BackgroundMap className="mapContainer w-100" />
+			<BackgroundMap className="mapContainer w-100"></BackgroundMap>
 			</div>
+				{/* <HeroMenu /> */}
 		</div>)
 
 export default App;
