@@ -5,7 +5,6 @@ const baseURL = () => {
 const mbToken = () => {
     return 'pk.eyJ1Ijoid2FsdGVyaiIsImEiOiJja2FobWU4dTMwMnR4MnNudWlicmtpc2xkIn0.nAPmnPgkjTXOT808EenEsA';
 } 
-    
 
 
 export {baseURL,mbToken}

@@ -48,30 +48,28 @@ body,
 .zi100{
   z-index: 100;
 }
-.ht h1{
+.signature h1{
   font-family: 'Pacifico', cursive;
   padding: 0 0 0 20px;
   margin: 0;
-  font-size: 40px;
+  font-size: 90px;
   color: var(--orange);
   opacity: 100%;
   color: var(--orange);
   text-shadow: -2px -2px 0 #213D50, 2px -2px 0 #213D50, -2px 2px 0 #213D50, 2px 2px 0 #213D50;
 }
-
-.heading{
-  position: absolute;
-  width: 97%;
-  z-index:10;
-  margin-top:20%;
+.signature{
+  top: 250px;
+  padding-left: 20px;
 }
-.sub-heading{
-  position: absolute;
-  padding-left: 5%;
-  width:70%;
-  float: left;
-  z-index:30;
-  margin-top:30%;
+.signature h2{ 
+  font-family: 'Pacifico', cursive;
+  padding: 50px 0 0 120px;
+  margin: 0;
+  font-size: 45px;
+  color: var(--white);
+  opacity: 100%;
+  text-shadow: -2px -2px 0 #213D50, 2px -2px 0 #213D50, -2px 2px 0 #213D50, 2px 2px 0 #213D50;
 }
 .foot{
   bottom: 0;

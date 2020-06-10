@@ -8,14 +8,20 @@ import { FeedMessage } from './gtfs-realtime.browser.proto.js';
 import {cors} from './cors';
 import githubData from './github';
 
+// images
+// import { ReactComponent as Walter } from './assets/walterjenkins2.svg';
+// import { ReactComponent as Subhead } from './assets/mapsdataprocessing2.svg'
+
+
 
 // !!! NOTES !!!
 // preprocessing .proto files and working with pbf -> https://gavinr.com/protocol-buffers-protobuf-browser/
 // processing cors errors -> https://daveceddia.com/access-control-allow-origin-cors-errors-in-react-express/
+// import and load svg's -> https://blog.logrocket.com/how-to-use-svgs-in-react/
 
 // // todo: set up interval to refetch
 	// // todo: have to set up add every 15 seconds
-// todo: add in header
+// // todo: add in header
 // todo: figure out how to pan and zoom on click
 // todo: disable pan and zoom
 
@@ -62,10 +68,7 @@ class BackgroundMap extends React.Component {
 		};
 
 		}
-		// activeTime: string id associated with the active vehicle layer
-		// newTime: string id associated with the data that is being processed
-		// mapData: array of geoJson objects that hold the vehicle location data
-	
+		
 	// initialize the map
 	componentDidMount() {
 		const mapOptions = {
@@ -118,9 +121,7 @@ class BackgroundMap extends React.Component {
 
 			}
 		});
-	}
-	// end of helper functions
-	
+	}	
 	
 	// start of builder functions
 	loadData = (geoJson) => {
@@ -149,13 +150,13 @@ class BackgroundMap extends React.Component {
 	// end of builder functions
 
     render() {
-
 		return (
 			<div id='map'
 			ref={el => this.mapContainer = el}
 			className="mapContainer h80 w-100"
 			width={this.state.width}
-			height={this.state.height}>
+				height={this.state.height}>
+				{this.props.children}
 			</div>
       )
 	};
@@ -165,41 +166,34 @@ class Header extends React.Component {
 	render() {
 		return(
 			<div id="head" class="op80 w-100 zi100 inlineext pa0 inline w-100 pv2 v-mid">
-				<div id="title" className="relative ht pa0 fl"><h1>Walter Jenkins</h1></div>
-
-					<nav class='helvetica pv3 ph2 tc fr ph3'>  
-						<a class='link orange gray mh3 f6' data-value="blog" href="https://blog.walterkjenkins.com">Blog</a>
-						<a class='link orange gray mh3 f6' data-value="contact" href="#contact">Contact</a>
-						<a class='link orange gray mh3 f6' data-value="portfolio"href="#portfolio">Portfolio</a>    
-					</nav>
+				<nav class='helvetica pv3 ph2 tc fr ph3'>  
+					<a class='link orange gray mh3 f6' data-value="blog" href="https://blog.walterkjenkins.com">Blog</a>
+					<a class='link orange gray mh3 f6' data-value="contact" href="#contact">Contact</a>
+					<a class='link orange gray mh3 f6' data-value="services"href="#services">Services</a>    
+					<a class='link orange gray mh3 f6' data-value="portfolio"href="#portfolio">Portfolio</a>    
+				</nav>
 			</div>
 		)
 	}
 };
   
-class HeroMenu extends React.Component {
-	element = (item) => (
-		<div id='{item}'>
-			<img id='{item}Icon' class='flex center' src='assets/{item}.svg' alt='{item}'></img>
-		</div>
-	);
-
-	list = ['data', 'maps', 'tools'];
+class Signature extends React.Component {
 
 	render() {
-
 		return (
-			<div id='hero-menu' class='w-70 center flex'>
+			<div id='hero-menu' class='w-90 relative  zi100 signature pa0 fl'>
+					<h1>Walter Jenkins</h1>
+					<h2>Maps+Data+Processing</h2>
+			</div>
+		)
+	}
+}
 
-				{/* <div id='data' class='w-30 center flex bg-blue'>
-					<img id='dataIcon' class='flex center' src='assets/data.svg' alt='data'></img>
-				</div>
-				<div id='maps' class='w-30 center flex'>
-					<img id='mapsIcon' class='flex center'  src='assets/maps.svg' alt='maps'></img>
-				</div>
-				<div id='tools' class='w-30 center flex'>
-					<img id='toolsIcon' class='flex center'  src='./assets/tools.svg' alt='tools'></img>
-				</div> */}
+class Services extends React.Component {
+	render() {
+		return (
+			<div id="services" class="w-100 flex">
+
 			</div>
 		)
 	}
@@ -211,9 +205,10 @@ const App = () => (
 				<Header className="h60 w-100" />
 			</div>
 			<div id="map" className="mapContainer w-100">
-			<BackgroundMap className="mapContainer w-100"></BackgroundMap>
+			<BackgroundMap className="mapContainer w-100">
+				<Signature />
+			</BackgroundMap>
 			</div>
-				{/* <HeroMenu /> */}
 		</div>)
 
 export default App;
