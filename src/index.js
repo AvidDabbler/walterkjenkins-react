@@ -5,6 +5,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BackgroundMap } from './App';
 
+// images
+
 class Header extends React.Component {
 	render() {
 		return(

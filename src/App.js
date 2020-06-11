@@ -11,6 +11,8 @@ import githubData from './github';
 // images
 // import { ReactComponent as Walter } from './assets/walterjenkins2.svg';
 // import { ReactComponent as Subhead } from './assets/mapsdataprocessing2.svg'
+import  DataLogo from './assets/data.svg';
+
 
 
 
@@ -75,7 +77,8 @@ class BackgroundMap extends React.Component {
 			container: this.mapContainer,
 			style: 'mapbox://styles/walterj/ckb1lvnmk06y11ilx1sf3uctj',
 			center: [this.state.lng, this.state.lat],
-			zoom: this.state.zoom
+			zoom: this.state.zoom,
+			interactive: false,
 		}
 		this.map = new mapboxgl.Map(mapOptions);
 		this.getAndLoad();	
@@ -93,7 +96,6 @@ class BackgroundMap extends React.Component {
 			const bufferRes = await response.arrayBuffer();
 			const pbf = new Pbf(new Uint8Array(bufferRes));
 			const obj = FeedMessage.read(pbf);
-			console.log(new Date())
 			return geoData(obj.entity);
 		} else {
 			console.error("error: ", response.status);
@@ -102,7 +104,6 @@ class BackgroundMap extends React.Component {
 
 	addSource = (geoJson) => {
 		const map = this.map;
-		console.log(this.state);
 		map.addSource(`vehicles`, {
 			'type': 'geojson',
 			'data': geoJson,
@@ -137,7 +138,7 @@ class BackgroundMap extends React.Component {
 		this.getData().then(data => {
 			map.getSource('vehicles').setData(data)
 		})
-	}
+	};
 	
 	getAndLoad = () => {
 		this.getData()
@@ -167,10 +168,10 @@ class Header extends React.Component {
 		return(
 			<div id="head" class="op80 w-100 zi100 inlineext pa0 inline w-100 pv2 v-mid">
 				<nav class='helvetica pv3 ph2 tc fr ph3'>  
-					<a class='link orange gray mh3 f6' data-value="blog" href="https://blog.walterkjenkins.com">Blog</a>
-					<a class='link orange gray mh3 f6' data-value="contact" href="#contact">Contact</a>
 					<a class='link orange gray mh3 f6' data-value="services"href="#services">Services</a>    
 					<a class='link orange gray mh3 f6' data-value="portfolio"href="#portfolio">Portfolio</a>    
+					<a class='link orange gray mh3 f6' data-value="blog" href="#blog">Blog</a>
+					<a class='link orange gray mh3 f6' data-value="contact" href="#contact">Contact</a>
 				</nav>
 			</div>
 		)
@@ -178,26 +179,88 @@ class Header extends React.Component {
 };
   
 class Signature extends React.Component {
-
 	render() {
 		return (
 			<div id='hero-menu' class='w-90 relative  zi100 signature pa0 fl'>
-					<h1>Walter Jenkins</h1>
-					<h2>Maps+Data+Processing</h2>
+				<h1>Walter Jenkins</h1>
+				<h2>Maps+Data+Processing</h2>
 			</div>
 		)
 	}
 }
 
-class Services extends React.Component {
-	render() {
-		return (
-			<div id="services" class="w-100 flex">
+const ser = [
+	{
+		name: 'Maps',
+		icon: `./assets/maps.svg`,
+		desc: '',
+		projectList: [],
 
-			</div>
-		)
-	}
-}
+	},
+	{
+		name: 'Data',
+		icon: DataLogo,
+		desc: '',
+		projectList: [],
+
+	},
+	{
+		name: 'Processing',
+		icon: `assets/processing.svg`,
+		desc: '',
+		projectList: [],
+
+	},
+];
+
+const list = [];
+const RenderSect = () => {
+	ser.forEach((a) =>{
+		list.push(
+			<div id={a.name}>
+				<img src={a.icon} alt={a.name} icon></img>
+				<h2>{a.name}</h2>
+			</div>)}
+	)
+	return list
+};
+
+// const Services = () => (
+// 		{ser.forEach((a) =>
+// 				(
+// 					<div id={a.name}>
+// 						<img src={a.icon} alt={a.name}></img>
+// 						<h2>{a.name}</h2>
+// 					</div>))
+// 		}
+// 	);
+
+
+	// createTable = () => {
+	// 	let table = []
+	
+	// 	// Outer loop to create parent
+	// 	for (let i = 0; i < 3; i++) {
+	// 	  let children = []
+	// 	  //Inner loop to create children
+	// 	  for (let j = 0; j < 5; j++) {
+	// 		children.push(<td>{`Column ${j + 1}`}</td>)
+	// 	  }
+	// 	  //Create the parent and add the children
+	// 	  table.push(<tr>{children}</tr>)
+	// 	}
+	// 	return table
+	//   }
+
+	// render() {
+	// 	console.log(this.renderSect())
+	// 	return (
+	// 		<div id="services4" class="w-100 flex">
+	// 			{this.renderSect}
+	// 		</div>
+	// 	)
+	// }
+
 
 const App = () => (
 		<div id="app" className="w-100">
@@ -205,10 +268,11 @@ const App = () => (
 				<Header className="h60 w-100" />
 			</div>
 			<div id="map" className="mapContainer w-100">
-			<BackgroundMap className="mapContainer w-100">
-				<Signature />
-			</BackgroundMap>
+				<BackgroundMap className="mapContainer w-100">
+					<Signature />
+				</BackgroundMap>
 			</div>
+			<RenderSect />
 		</div>)
 
 export default App;
