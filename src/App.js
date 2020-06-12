@@ -12,6 +12,8 @@ import githubData from './github';
 // import { ReactComponent as Walter } from './assets/walterjenkins2.svg';
 // import { ReactComponent as Subhead } from './assets/mapsdataprocessing2.svg'
 import  DataLogo from './assets/data.svg';
+import  MapLogo from './assets/map.svg';
+import ProcessingLogo from './assets/tools.svg';
 
 
 
@@ -181,7 +183,7 @@ class Header extends React.Component {
 class Signature extends React.Component {
 	render() {
 		return (
-			<div id='hero-menu' class='w-90 relative  zi100 signature pa0 fl'>
+			<div id='hero-menu' class='w-90 relative  zi100 signature pa0 fl h6'>
 				<h1>Walter Jenkins</h1>
 				<h2>Maps+Data+Processing</h2>
 			</div>
@@ -192,8 +194,9 @@ class Signature extends React.Component {
 const ser = [
 	{
 		name: 'Maps',
-		icon: `./assets/maps.svg`,
+		icon: MapLogo,
 		desc: '',
+		credit: 'GPS by Turkkub from the Noun Project',
 		projectList: [],
 
 	},
@@ -201,66 +204,31 @@ const ser = [
 		name: 'Data',
 		icon: DataLogo,
 		desc: '',
+		credit: 'Data by OliM from the Noun Project',
 		projectList: [],
 
 	},
 	{
 		name: 'Processing',
-		icon: `assets/processing.svg`,
+		icon: ProcessingLogo,
 		desc: '',
+		credit: 'tools by Luboš Volkov from the Noun Project',
 		projectList: [],
 
 	},
 ];
 
-const list = [];
 const RenderSect = () => {
+	const list = [];
 	ser.forEach((a) =>{
 		list.push(
-			<div id={a.name}>
-				<img src={a.icon} alt={a.name} icon></img>
+			<div id={a.name} className='w-10 center flex flex-column v-mid'>
+				<img src={a.icon} alt={a.name} icon data-credit={a.credit}></img>
 				<h2>{a.name}</h2>
 			</div>)}
 	)
 	return list
 };
-
-// const Services = () => (
-// 		{ser.forEach((a) =>
-// 				(
-// 					<div id={a.name}>
-// 						<img src={a.icon} alt={a.name}></img>
-// 						<h2>{a.name}</h2>
-// 					</div>))
-// 		}
-// 	);
-
-
-	// createTable = () => {
-	// 	let table = []
-	
-	// 	// Outer loop to create parent
-	// 	for (let i = 0; i < 3; i++) {
-	// 	  let children = []
-	// 	  //Inner loop to create children
-	// 	  for (let j = 0; j < 5; j++) {
-	// 		children.push(<td>{`Column ${j + 1}`}</td>)
-	// 	  }
-	// 	  //Create the parent and add the children
-	// 	  table.push(<tr>{children}</tr>)
-	// 	}
-	// 	return table
-	//   }
-
-	// render() {
-	// 	console.log(this.renderSect())
-	// 	return (
-	// 		<div id="services4" class="w-100 flex">
-	// 			{this.renderSect}
-	// 		</div>
-	// 	)
-	// }
-
 
 const App = () => (
 		<div id="app" className="w-100">
@@ -271,8 +239,11 @@ const App = () => (
 				<BackgroundMap className="mapContainer w-100">
 					<Signature />
 				</BackgroundMap>
-			</div>
+		</div>
+		<div id="services" className="flex w-80 flex-row space-around center v-mid h6">
 			<RenderSect />
-		</div>)
+		</div>
+	</div>
+)
 
 export default App;
