@@ -1,19 +1,29 @@
-import React from 'react';
+// react
+import React, { Component, Fragment } from 'react';
+
+// css
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './App.css';
-import {mbToken} from './private';
+
+// npm
 import mapboxgl from 'mapbox-gl';
 import Pbf from 'pbf';
+
+// data
+import { githubData } from './data';
 import { FeedMessage } from './gtfs-realtime.browser.proto.js';
-import {cors} from './cors';
-import githubData from './github';
+
+// private
+import { mbToken, mapStyle } from './private';
+import { cors } from './cors';
 
 // images
-// import { ReactComponent as Walter } from './assets/walterjenkins2.svg';
-// import { ReactComponent as Subhead } from './assets/mapsdataprocessing2.svg'
-import  DataLogo from './assets/data.svg';
+import  DataLogo, { ReactComponent } from './assets/data.svg';
 import  MapLogo from './assets/map.svg';
 import ProcessingLogo from './assets/tools.svg';
+
+// components
+import Articles from './Articles';
 
 
 
@@ -23,11 +33,23 @@ import ProcessingLogo from './assets/tools.svg';
 // processing cors errors -> https://daveceddia.com/access-control-allow-origin-cors-errors-in-react-express/
 // import and load svg's -> https://blog.logrocket.com/how-to-use-svgs-in-react/
 
+// NAV
+// // todo: add in header
+
+// MAP
 // // todo: set up interval to refetch
 	// // todo: have to set up add every 15 seconds
-// // todo: add in header
-// todo: figure out how to pan and zoom on click
-// todo: disable pan and zoom
+// // todo: figure out how to pan and zoom on click
+// // todo: disable pan and zoom
+
+// BLOG
+// // todo: get blog data to fetch
+// todo: get services to look correct on resize
+// todo: render 3 newest articles
+
+// PROJECTS
+// todo: pick out 3 projects to highlight
+// todo: put together a dictionary of all of the projects that you what to show
 
 mapboxgl.accessToken = mbToken();
 var pburl = "https://www.metrostlouis.org/RealTimeData/StlRealTimeVehicles.pb?cacheBust=" + new Date().time;
@@ -61,7 +83,7 @@ const geoData = (d) => {
 
 
 
-class BackgroundMap extends React.Component {
+class BackgroundMap extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -77,14 +99,14 @@ class BackgroundMap extends React.Component {
 	componentDidMount() {
 		const mapOptions = {
 			container: this.mapContainer,
-			style: 'mapbox://styles/walterj/ckb1lvnmk06y11ilx1sf3uctj',
+			style: mapStyle(),
 			center: [this.state.lng, this.state.lat],
 			zoom: this.state.zoom,
 			interactive: false,
 		}
 		this.map = new mapboxgl.Map(mapOptions);
 		this.getAndLoad();	
-		githubData();
+		// githubData();
 
 	};
 	
@@ -159,33 +181,33 @@ class BackgroundMap extends React.Component {
 			className="mapContainer h80 w-100"
 			width={this.state.width}
 				height={this.state.height}>
-				{this.props.children}
 			</div>
       )
 	};
 };
 
-class Header extends React.Component {
+class Header extends Component {
 	render() {
 		return(
-			<div id="head" class="op80 w-100 zi100 inlineext pa0 inline w-100 pv2 v-mid">
-				<nav class='helvetica pv3 ph2 tc fr ph3'>  
-					<a class='link orange gray mh3 f6' data-value="services"href="#services">Services</a>    
-					<a class='link orange gray mh3 f6' data-value="portfolio"href="#portfolio">Portfolio</a>    
-					<a class='link orange gray mh3 f6' data-value="blog" href="#blog">Blog</a>
-					<a class='link orange gray mh3 f6' data-value="contact" href="#contact">Contact</a>
+			<div id="head" class="op80 w-100 zi100 pa0 inline w-100 pv2 v-mid">
+				<nav class='pv3 ph2 tc fr ph3'>  
+					<a class='link mh3 f6' data-value="services"href="#services">Services</a>    
+					{/* <a class='link mh3 f6' data-value="portfolio"href="#portfolio">Portfolio</a>     */}
+					<a class='link mh3 f6' data-value="projects"href="#projects">Projects</a>    
+					<a class='link mh3 f6' data-value="blog" href="#blog">Blog</a>
+					<a class='link mh3 f6' data-value="contact" href="#contact">Contact</a>
 				</nav>
 			</div>
 		)
 	}
 };
   
-class Signature extends React.Component {
+class Signature extends Component {
 	render() {
 		return (
-			<div id='hero-menu' class='w-90 relative  zi100 signature pa0 fl h6'>
-				<h1>Walter Jenkins</h1>
-				<h2>Maps+Data+Processing</h2>
+			<div id='hero-menu' class='w-90 v-mid center zi100 inline signature pa3 fl h6'>
+				<h1 className='f-headline'>Walter Jenkins</h1>
+				<h2 className='f1'>Maps+Data+Processing</h2>
 			</div>
 		)
 	}
@@ -218,31 +240,44 @@ const ser = [
 	},
 ];
 
+
+// ! CONVERT TO CLASS
 const RenderSect = () => {
 	const list = [];
+	// if page width is > 1000? 
 	ser.forEach((a) =>{
 		list.push(
-			<div id={a.name} className='w-10 center flex flex-column v-mid'>
-				<img src={a.icon} alt={a.name} icon data-credit={a.credit}></img>
-				<h2>{a.name}</h2>
-			</div>)}
+			// issue with icon div height and width
+				<a id={a.name} className='services service-div blue-div br3  center v-mid'>
+					<img src={a.icon} alt={a.name} icon data-credit={a.credit} className='flex pa4 center v-mid inline'></img>
+					{/* <h2 className='center link mv3 pa0 tc'>{a.name}</h2> */}
+				</a>)}
 	)
 	return list
 };
 
+
 const App = () => (
-		<div id="app" className="w-100">
-			<div className=" w-100 zi100">
-				<Header className="h60 w-100" />
-			</div>
-			<div id="map" className="mapContainer w-100">
-				<BackgroundMap className="mapContainer w-100">
-					<Signature />
-				</BackgroundMap>
+	<div id="app" className="w-100">
+
+		<div className=" w-100 zi100">
+			<Header className="h60 w-100" />
 		</div>
-		<div id="services" className="flex w-80 flex-row space-around center v-mid h6">
+		
+		<div id="map" className="mapContainer w-100">
+			<BackgroundMap className="mapContainer w-100" />
+		</div>
+		
+		<Signature />
+		
+		<div id="services" className="blue-div br3 pa4 flex w-80 flex-row space-around center v-mid h6 justify-around mb4">
 			<RenderSect />
 		</div>
+
+		<div id='blog' className="blue-div br3 pa4 flex w-80 flex-row space-around center v-mid h6 justify-around mb4">
+			<Articles />
+		</div>
+
 	</div>
 )
 

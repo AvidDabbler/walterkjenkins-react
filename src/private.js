@@ -6,5 +6,8 @@ const mbToken = () => {
     return 'pk.eyJ1Ijoid2FsdGVyaiIsImEiOiJja2FobWU4dTMwMnR4MnNudWlicmtpc2xkIn0.nAPmnPgkjTXOT808EenEsA';
 } 
 
+const mapStyle = () => 'mapbox://styles/walterj/ckb1lvnmk06y11ilx1sf3uctj';
 
-export {baseURL,mbToken}
+
+
+export {baseURL,mbToken, mapStyle}

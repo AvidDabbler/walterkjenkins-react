@@ -1,8 +1,6 @@
-import React from 'react';
 import './App.css';
-import {mbToken} from './private';
-import mapboxgl from 'mapbox-gl';
-import {cors_noDate, cors} from './cors';
+import { cors_noDate, cors } from './cors';
+import Parser from 'rss-parser';
 
 let repos = [
     {
@@ -44,4 +42,18 @@ const githubData = async () => {
     });
 };
 
-export default githubData;
+const rss_url = 'https://raw.githubusercontent.com/AvidDabbler/blog/master/rss.xml';
+
+
+const blog = async () => {
+    const parser = new Parser();
+    let feed = await parser.parseURL(cors_noDate(rss_url));
+    let list = []
+    for (let i = 0; i < 3; i++) {
+        list.push(feed.items[i]);
+    }
+    console.log(list);
+    return list;
+};
+
+export {githubData, blog};
