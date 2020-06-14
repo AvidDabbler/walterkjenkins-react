@@ -248,9 +248,8 @@ const RenderSect = () => {
 	ser.forEach((a) =>{
 		list.push(
 			// issue with icon div height and width
-				<a id={a.name} className='services service-div blue-div br3  center v-mid'>
-					<img src={a.icon} alt={a.name} icon data-credit={a.credit} className='flex pa4 center v-mid inline'></img>
-					{/* <h2 className='center link mv3 pa0 tc'>{a.name}</h2> */}
+				<a key={a.name} id={a.name} className='services service-div blue-div br3  center v-mid'>
+					<img src={a.icon} alt={a.name} data-credit={a.credit} className='flex icon pa4 center v-mid inline'></img>
 				</a>)}
 	)
 	return list
