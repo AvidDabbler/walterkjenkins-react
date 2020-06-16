@@ -32,14 +32,14 @@ class Articles extends Component {
 
 	newestArticles(data) {
 		return data.map(el => (
-			<div className="">
-						<a className="white no-underline" href={el.link}>
-							<h3>{el.title}</h3>
-							<h4>{this.date(el.pubDate)}</h4>
+			<div className="" key={el.pubDate}>
+				<a className="white no-underline" href={el.link}>
+					<h3>{el.title}</h3>
+					<h4>{this.date(el.pubDate)}</h4>
 					<p>{el.contentSnippet}</p>
-						<p className='i underline-hover'>Continue reading...</p>
-							
-						</a>
+					<p className='i underline-hover'>Continue reading...</p>
+						
+				</a>
 					</div>
 		))
 	}
