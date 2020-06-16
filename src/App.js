@@ -273,7 +273,7 @@ const App = () => (
 			<RenderSect />
 		</div>
 
-		<div id='blog' className="blue-div br3 pa4 flex w-80 flex-row space-around center v-mid h6 justify-around mb4">
+		<div id='blog' className="center blue-div br3 pa4 flex w-80 flex-row space-around center v-mid h6 justify-around mb4">
 			<Articles />
 		</div>
 

@@ -20,14 +20,25 @@ class Articles extends Component {
 		this.setState({ blogData: blogArray, loading: false });
 	}
 
+	date(d) {
+		const fullDate = new Date(d);
+		let year = fullDate.getFullYear();
+		let month = (1 + fullDate.getMonth()).toString().padStart(2, '0');
+		let day = fullDate.getDate().toString().padStart(2, '0');
+
+		return month + '/' + day + '/' + year;
+	}
+
 
 	newestArticles(data) {
 		return data.map(el => (
 			<div className="">
-						<a className="" >
+						<a className="white no-underline" href={el.link}>
 							<h3>{el.title}</h3>
-							<h4>{el.pubDate}</h4>
-							<p>{el.contentSnippet}</p>
+							<h4>{this.date(el.pubDate)}</h4>
+					<p>{el.contentSnippet}</p>
+						<p className='i underline-hover'>Continue reading...</p>
+							
 						</a>
 					</div>
 		))
@@ -39,7 +50,7 @@ class Articles extends Component {
 		const { loading, blogData } = this.state;
 		return (
 			<div id="idk">
-				<h2 className="flex center section-title">Blog</h2>
+				<h2 className="flex center tc section-title">Blog</h2>
 				<div id='articles' className="">
 					{/* {loading ? `Classic loading placeholder. this.state.loading: ${blogData}` : this.newestArticles(blogData)} */}
 					{loading ? console.log("it is loading") : this.newestArticles(blogData)}

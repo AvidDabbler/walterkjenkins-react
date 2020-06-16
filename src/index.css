@@ -94,10 +94,7 @@ body,
 }
 .blue-div{
   background-color: rgb(66,122,161, 0.3);
-}
-#services{
-  max-width: 800px;
-  height: 700px;
+  max-width: 900px;
   display: flex;
   flex-wrap: wrap;
 }
