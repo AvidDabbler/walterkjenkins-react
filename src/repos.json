@@ -19,7 +19,9 @@
     "publicName": "Metro St Louis Esri ETL",
     "language": "Python",
     "tags": ["esri", "gis", "arcgis online", "python"],
-    "sections": ["data", "workflows", "management", "infrustructure"]
+    "sections": ["data", "workflows", "management", "infrustructure"],
+    "desc": "A mobile friendly application used to"
+
   },
   {
     "name": "GTFSRT-Parsing",
@@ -35,6 +37,8 @@
       "mapbox",
       "leaflet"
     ],
-    "sections": ["applications", "data", "workflows", "collect"]
+    "sections": ["applications", "data", "workflows", "collect"],
+    "desc": "A mobile friendly application used to"
+
   }
 ]

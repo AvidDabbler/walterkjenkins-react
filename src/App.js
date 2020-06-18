@@ -194,8 +194,8 @@ class Header extends Component {
 				<nav className='pv3 ph2 tc fr ph3'>  
 					<a className='link mh3 f6' data-value="services"href="#services">Services</a>    
 					{/* <a className='link mh3 f6' data-value="portfolio"href="#portfolio">Portfolio</a>     */}
-					<a className='link mh3 f6' data-value="projects"href="#projects">Projects</a>    
 					<a className='link mh3 f6' data-value="blog" href="#blog">Blog</a>
+					<a className='link mh3 f6' data-value="projects"href="#projects">Projects</a>    
 					<a className='link mh3 f6' data-value="contact" href="#contact">Contact</a>
 				</nav>
 			</div>
@@ -249,8 +249,8 @@ const RenderSect = () => {
 	ser.forEach((a) =>{
 		list.push(
 			// issue with icon div height and width
-			<div className='w-30 center tc white blue-div br3'>
-				<img src={a.icon} alt={a.name} data-credit={a.credit} className='flex icon pa4 center v-mid inline w-40'></img>
+			<div className='w-30 center tc white blue-div br3 flex flex-column'>
+				<img src={a.icon} alt={a.name} data-credit={a.credit} className='center flex icon pa3 center v-mid inline w-40'></img>
 				<h2 className='center tc pa0 ma0'>{a.name}</h2>
 				<p className='center tc mv3'>{a.desc}</p>
 			</div>
