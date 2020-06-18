@@ -24,6 +24,7 @@ import ProcessingLogo from './assets/tools.svg';
 
 // components
 import Articles from './Articles';
+import Projects from './Projects';
 
 
 
@@ -48,8 +49,8 @@ import Articles from './Articles';
 // todo: render 3 newest articles
 
 // PROJECTS
-// todo: pick out 3 projects to highlight
-// todo: put together a dictionary of all of the projects that you what to show
+// // todo: pick out 3 projects to highlight
+// // todo: put together a dictionary of all of the projects that you what to show
 
 mapboxgl.accessToken = mbToken();
 var pburl = "https://www.metrostlouis.org/RealTimeData/StlRealTimeVehicles.pb?cacheBust=" + new Date().time;
@@ -217,7 +218,7 @@ const ser = [
 	{
 		name: 'Maps',
 		icon: MapLogo,
-		desc: '',
+		desc: 'Designing stunning mapping applications and visualizations.',
 		credit: 'GPS by Turkkub from the Noun Project',
 		projectList: [],
 
@@ -225,7 +226,7 @@ const ser = [
 	{
 		name: 'Data',
 		icon: DataLogo,
-		desc: '',
+		desc: 'Architecting sustainable logical data structures for sensible applications.',
 		credit: 'Data by OliM from the Noun Project',
 		projectList: [],
 
@@ -233,7 +234,7 @@ const ser = [
 	{
 		name: 'Processing',
 		icon: ProcessingLogo,
-		desc: '',
+		desc: 'A track record of turning chaos into calm by standardizing worflows and processes.',
 		credit: 'tools by Luboš Volkov from the Noun Project',
 		projectList: [],
 
@@ -248,9 +249,13 @@ const RenderSect = () => {
 	ser.forEach((a) =>{
 		list.push(
 			// issue with icon div height and width
-				<a key={a.name} id={a.name} className='services service-div blue-div br3  center v-mid'>
-					<img src={a.icon} alt={a.name} data-credit={a.credit} className='flex icon pa4 center v-mid inline'></img>
-				</a>)}
+			<div className='w-30 center tc white blue-div br3'>
+				<img src={a.icon} alt={a.name} data-credit={a.credit} className='flex icon pa4 center v-mid inline w-40'></img>
+				<h2 className='center tc pa0 ma0'>{a.name}</h2>
+				<p className='center tc mv3'>{a.desc}</p>
+			</div>
+		)
+	}
 	)
 	return list
 };
@@ -269,12 +274,16 @@ const App = () => (
 		
 		<Signature />
 		
-		<div id="services" className="blue-div br3 pa4 flex w-80 flex-row space-around center v-mid h6 justify-around mb4">
+		<div id="services" className="blue-div br3 pa4 flex w-80 flex-row space-around center v-mid mb4">
 			<RenderSect />
 		</div>
 
 		<div id='blog' className="center blue-div br3 pa4 flex w-80 flex-row space-around center v-mid h6 justify-around mb4">
 			<Articles />
+		</div>
+
+		<div id='projects' className="center blue-div br3 pa4 flex w-80 flex-row space-around center v-mid h6 justify-around mb4">
+			<Projects />
 		</div>
 
 	</div>

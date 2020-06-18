@@ -101,7 +101,6 @@ body,
 .services {
   flex: 0 1 24%;
   height: 25%;
-  width: 30%;
 }
 .section-title {
   color: var(--white);

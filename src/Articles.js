@@ -32,29 +32,34 @@ class Articles extends Component {
 
 	newestArticles(data) {
 		return data.map(el => (
-			<div className="" key={el.pubDate}>
+			<div className="white" key={el.pubDate}>
+				<h3>{el.title}</h3>
+				<h4>{this.date(el.pubDate)}</h4>
+				<p>{el.contentSnippet}</p>
 				<a className="white no-underline" href={el.link}>
-					<h3>{el.title}</h3>
-					<h4>{this.date(el.pubDate)}</h4>
-					<p>{el.contentSnippet}</p>
 					<p className='i underline-hover'>Continue reading...</p>
-						
 				</a>
-					</div>
+			</div>
 		))
 	}
 	
-	
 	render() {
-		console.log(this.state);
 		const { loading, blogData } = this.state;
 		return (
 			<div id="idk">
-				<h2 className="flex center tc section-title">Blog</h2>
+				<a href='https://blog.walterkjenkins.com'>
+					<h2 className="center tc section-title">Blog</h2>
+				</a>
+
 				<div id='articles' className="">
 					{/* {loading ? `Classic loading placeholder. this.state.loading: ${blogData}` : this.newestArticles(blogData)} */}
 					{loading ? console.log("it is loading") : this.newestArticles(blogData)}
 				</div>
+
+				<a href="https://blog.walterkjenkins.com">
+					<p className="white center tc no-underline underline-hover">Continue to blog...</p>
+				</a>
+				
 			</div>)
 	}
 };
