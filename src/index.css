@@ -108,3 +108,9 @@ body,
 .section-title h2{
   font-size: 40px;
 }
+#contact {
+  height:90vh;
+}
+.icon {
+  display:inline;
+}

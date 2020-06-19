@@ -20,8 +20,9 @@ import { cors } from './cors';
 import  DataLogo, { ReactComponent } from './assets/data.svg';
 import  MapLogo from './assets/map.svg';
 import ProcessingLogo from './assets/tools.svg';
-import PY from './assets/python.svg';
-import JS from './assets/javascript.svg';
+import Github from './assets/github.svg';
+import Email from './assets/email2.svg';
+import Linkedin from './assets/linkedin2.svg';
 
 // components
 import Articles from './Articles';
@@ -234,7 +235,7 @@ const ser = [
 	{
 		name: 'Processing',
 		icon: ProcessingLogo,
-		desc: 'A track record of turning chaos into calm by standardizing worflows and processes.',
+		desc: 'A track record of turning chaos into calm by standardizing workflows and processes.',
 		credit: 'tools by Luboš Volkov from the Noun Project',
 		projectList: [],
 
@@ -260,6 +261,21 @@ const RenderSect = () => {
 	return list
 };
 
+const Contact = () => {
+	return (
+		<div id='contact_div' className="di w-80 flex flex-row justify-around v-mid">
+			<a href="mailto:walter.k.jenkins@gmail.com"  className="icon v-mid di w-20" >
+				<img src={Email} className="v-mid"></img>
+			</a>
+			<a href="git.walterkjenkins.com"  className="icon v-mid di w-20" >
+				<img src={Github}></img>
+			</a>
+			<a href="linkedin.walterkjenkins.com"  className="icon v-mid di w-20" >
+				<img src={Linkedin}></img>
+			</a>
+		</div>)
+}
+
 
 const App = () => (
 	<div id="app" className="w-100">
@@ -284,6 +300,10 @@ const App = () => (
 
 		<div id='projects' className="center blue-div br3 pa4 flex w-80 w-70-m flex-row space-around center v-mid h6 justify-around mb4">
 			<Projects />
+		</div>
+
+		<div id='contact' className="center blue-div br3 pa4 flex w-80 w-70-m flex-row space-around center v-mid h6 justify-around mb4">
+			<Contact />
 		</div>
 
 	</div>
