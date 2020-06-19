@@ -49,8 +49,6 @@ body,
   font-family: 'Pacifico', cursive;
   padding: 0 0 0 20px;
   margin: 0;
-  /* font-size: 90px; */
-  color: var(--orange);
   opacity: 100%;
   color: var(--orange);
   text-shadow: -2px -2px 0 #213D50, 2px -2px 0 #213D50, -2px 2px 0 #213D50, 2px 2px 0 #213D50;
@@ -103,6 +101,10 @@ body,
   height: 25%;
 }
 .section-title {
-  color: var(--white);
-  font-family: Helvetica, sans-serif, Arial;
+  font-family: 'Pacifico', cursive;
+  color: var(--orange);
+  opacity: 100%;
+}
+.section-title h2{
+  font-size: 40px;
 }

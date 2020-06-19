@@ -4,23 +4,26 @@
     "publicName": "Bus Stop Assessment App",
     "language": "JavaScript",
     "tags": [
-      "gis",
-      "esri",
-      "project management",
-      "survey",
-      "asset management",
-      "javascript"
+      "GIS",
+      "ESRI",
+      "Mobile",
+      "Data Collection"
     ],
-    "sections": ["data", "mapping", "applications", "management"],
-    "desc": "A mobile friendly application used to"
+    "desc": "A mobile friendly application used to",
+    "front": true
   },
   {
     "name": "MetroSTL-Esri-ETL",
     "publicName": "Metro St Louis Esri ETL",
     "language": "Python",
-    "tags": ["esri", "gis", "arcgis online", "python"],
+    "tags": [
+      "GIS",
+      "ESRI",
+      "ETL"
+    ],
     "sections": ["data", "workflows", "management", "infrustructure"],
-    "desc": "A mobile friendly application used to"
+    "desc": "A mobile friendly application used to",
+    "front": true
 
   },
   {
@@ -28,17 +31,14 @@
     "publicName": "Realtime Bus Processing",
     "language": "Python",
     "tags": [
-      "realtime",
-      "protocol buffer",
-      "gps",
-      "transit",
-      "pb",
-      "gis",
-      "mapbox",
-      "leaflet"
+      "GPS",
+      "Protocol Buffer",
+      "MapBox",
+      "Leaflet"
     ],
     "sections": ["applications", "data", "workflows", "collect"],
-    "desc": "A mobile friendly application used to"
+    "desc": "A mobile friendly application used to",
+    "front": true
 
   }
 ]

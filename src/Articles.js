@@ -48,7 +48,7 @@ class Articles extends Component {
 		return (
 			<div id="idk">
 				<a href='https://blog.walterkjenkins.com' className='center tc section-title no-underline underline-hover'>
-					<h2 className="center tc section-title">Blog</h2>
+					<h2 className="center tc section-title mt0">Blog</h2>
 				</a>
 
 				<div id='articles' className="">
@@ -56,7 +56,7 @@ class Articles extends Component {
 					{loading ? console.log("it is loading") : this.newestArticles(blogData)}
 				</div>
 
-				<a href="https://blog.walterkjenkins.com" className='center tc section-title no-underline underline-hover'>
+				<a href="https://blog.walterkjenkins.com" className='center tc white no-underline underline-hover'>
 					<p>Continue to blog...</p>
 				</a>
 				

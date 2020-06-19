@@ -10,7 +10,6 @@ import mapboxgl from 'mapbox-gl';
 import Pbf from 'pbf';
 
 // data
-import { githubData } from './data';
 import { FeedMessage } from './gtfs-realtime.browser.proto.js';
 
 // private
@@ -107,7 +106,6 @@ class BackgroundMap extends Component {
 		}
 		this.map = new mapboxgl.Map(mapOptions);
 		this.getAndLoad();	
-		// githubData();
 
 	};
 	
@@ -249,10 +247,10 @@ const RenderSect = () => {
 	ser.forEach((a) =>{
 		list.push(
 			// issue with icon div height and width
-			<div className='w-30 center tc white blue-div br3 flex flex-column'>
+			<div className='center tc white blue-div br3 flex flex-column section-title w-100 w-60-m w-30-l pa2 mv3'>
 				<img src={a.icon} alt={a.name} data-credit={a.credit} className='center flex icon pa3 center v-mid inline w-40'></img>
-				<h2 className='center tc pa0 ma0'>{a.name}</h2>
-				<p className='center tc mv3'>{a.desc}</p>
+				<h2 className='center tc pa0 ma0 white'>{a.name}</h2>
+				<p className='center tc mv3 helvetica white'>{a.desc}</p>
 			</div>
 		)
 	}
@@ -274,15 +272,15 @@ const App = () => (
 		
 		<Signature />
 		
-		<div id="services" className="blue-div br3 pa4 flex w-80 flex-row space-around center v-mid mb4">
+		<div id="services" className="blue-div br3 pa4 flex w-80 w-70-m flex-row space-around center v-mid mb4">
 			<RenderSect />
 		</div>
 
-		<div id='blog' className="center blue-div br3 pa4 flex w-80 flex-row space-around center v-mid h6 justify-around mb4">
+		<div id='blog' className="center blue-div br3 pa4 flex w-80 w-70-m flex-row space-around center v-mid h6 justify-around mb4">
 			<Articles />
 		</div>
 
-		<div id='projects' className="center blue-div br3 pa4 flex w-80 flex-row space-around center v-mid h6 justify-around mb4">
+		<div id='projects' className="center blue-div br3 pa4 flex w-80 w-70-m flex-row space-around center v-mid h6 justify-around mb4">
 			<Projects />
 		</div>
 
