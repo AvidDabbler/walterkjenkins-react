@@ -20,6 +20,8 @@ import { cors } from './cors';
 import  DataLogo, { ReactComponent } from './assets/data.svg';
 import  MapLogo from './assets/map.svg';
 import ProcessingLogo from './assets/tools.svg';
+import PY from './assets/python.svg';
+import JS from './assets/javascript.svg';
 
 // components
 import Articles from './Articles';
