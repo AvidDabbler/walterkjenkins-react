@@ -103,9 +103,5 @@ dist
 # TernJS port file
 .tern-port
 
-
-CUSTOM
-src/private.js
-src/cors.js
 src/vehicles-test.json
 

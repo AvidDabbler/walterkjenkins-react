@@ -9,5 +9,4 @@ const mbToken = () => {
 const mapStyle = () => 'mapbox://styles/walterj/ckb1lvnmk06y11ilx1sf3uctj';
 
 
-
 export {baseURL,mbToken, mapStyle}
