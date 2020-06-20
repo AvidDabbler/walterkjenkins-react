@@ -263,14 +263,14 @@ const RenderSect = () => {
 
 const Contact = () => {
 	return (
-		<div id='contact_div' className="di w-80 flex flex-row justify-around v-mid">
-			<a href="mailto:walter.k.jenkins@gmail.com"  className="icon v-mid di w-20" >
-				<img src={Email} className="v-mid"></img>
+		<div id='contact_div' className="w-80 center justify-around">
+			<a href="mailto:walter.k.jenkins@gmail.com"  className="icon flex w-20" >
+				<img src={Email}></img>
 			</a>
-			<a href="git.walterkjenkins.com"  className="icon v-mid di w-20" >
+			<a href="git.walterkjenkins.com"  className="icon flex w-20" >
 				<img src={Github}></img>
 			</a>
-			<a href="linkedin.walterkjenkins.com"  className="icon v-mid di w-20" >
+			<a href="linkedin.walterkjenkins.com"  className="icon flex w-20" >
 				<img src={Linkedin}></img>
 			</a>
 		</div>)
@@ -294,15 +294,15 @@ const App = () => (
 			<RenderSect />
 		</div>
 
-		<div id='blog' className="center blue-div br3 pa4 flex w-80 w-70-m flex-row space-around center v-mid h6 justify-around mb4">
+		<div id='blog' className="center blue-div br3 pa4 flex w-80 w-70-m flex-row center v-mid h6 justify-around mb4">
 			<Articles />
 		</div>
 
-		<div id='projects' className="center blue-div br3 pa4 flex w-80 w-70-m flex-row space-around center v-mid h6 justify-around mb4">
+		<div id='projects' className="center blue-div br3 pa4 flex w-80 w-70-m flex-row  center v-mid h6 justify-around mb4">
 			<Projects />
 		</div>
 
-		<div id='contact' className="center blue-div br3 pa4 flex w-80 w-70-m flex-row space-around center v-mid h6 justify-around mb4">
+		<div id='contact' className="center blue-div br3 pa4 flex w-80 w-70-m flex-row center v-mid h6 mb4">
 			<Contact />
 		</div>
 

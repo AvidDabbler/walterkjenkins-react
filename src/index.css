@@ -114,3 +114,8 @@ body,
 .icon {
   display:inline;
 }
+#contact_div, #contact_div a, #contact_div img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
