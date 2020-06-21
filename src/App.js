@@ -184,7 +184,6 @@ class Header extends Component {
 			<div id="head" className="op80 w-100 zi100 pa0 inline w-100 pv2 v-mid">
 				<nav className='pv3 ph2 tc fr ph3'>  
 					<a className='link mh3 f6' data-value="services"href="#services">Services</a>    
-					{/* <a className='link mh3 f6' data-value="portfolio"href="#portfolio">Portfolio</a>     */}
 					<a className='link mh3 f6' data-value="blog" href="#blog">Blog</a>
 					<a className='link mh3 f6' data-value="projects"href="#projects">Projects</a>    
 					<a className='link mh3 f6' data-value="contact" href="#contact">Contact</a>
@@ -199,7 +198,7 @@ class Signature extends Component {
 		return (
 			<div id='hero-menu' className='w-90 v-mid center zi100 inline signature pa3 fl h6'>
 				<h1 className='f-headline'>Walter Jenkins</h1>
-				<h2 className='f1'>Maps+Data+Processing</h2>
+				<h2 className='f1 w-80'>Maps+Data+Processing</h2>
 			</div>
 		)
 	}
