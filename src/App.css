@@ -1,10 +1,9 @@
-
-:root{
+:root {
   --light-blue: #427aa1;
   --white: #ebf2fa;
   --medium-blue: #0f1b3d;
   --orange: #f06543;
-  --dark-blue: #0a122a
+  --dark-blue: #0a122a;
 }
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
 
@@ -17,8 +16,8 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -31,44 +30,47 @@ body,
 #app {
   height: 100%;
 }
-#head, #foot {
+#head,
+#foot {
   position: absolute;
   background-color: rgba(26, 48, 63, 0.8);
 }
 .link {
   color: var(--orange);
-  font-family: Helvetica, sans-serif
+  font-family: Helvetica, sans-serif;
 }
-.h60{
+.h60 {
   height: 60px;
 }
-.zi99{
+.zi99 {
   z-index: 99;
 }
-.zi100{
+.zi100 {
   z-index: 100;
 }
-.signature h1{
-  font-family: 'Pacifico', cursive;
+.signature h1 {
+  font-family: "Pacifico", cursive;
   padding: 0 0 0 20px;
   margin: 0;
   color: var(--orange);
-  text-shadow: -2px -2px 0 #213D50, 2px -2px 0 #213D50, -2px 2px 0 #213D50, 2px 2px 0 #213D50;
+  text-shadow: -2px -2px 0 #213d50, 2px -2px 0 #213d50, -2px 2px 0 #213d50,
+    2px 2px 0 #213d50;
 }
-.signature{
+.signature {
   top: 250px;
   padding-left: 20px;
-  height: 100vh;
+  height: 100%;
   position: relative;
 }
-.signature h2{ 
-  font-family: 'Pacifico', cursive;
+.signature h2 {
+  font-family: "Pacifico", cursive;
   padding: 15px 0 0 120px;
   margin: 0;
   color: var(--white);
-  text-shadow: -2px -2px 0 #213D50, 2px -2px 0 #213D50, -2px 2px 0 #213D50, 2px 2px 0 #213D50;
+  text-shadow: -2px -2px 0 #213d50, 2px -2px 0 #213d50, -2px 2px 0 #213d50,
+    2px 2px 0 #213d50;
 }
-.foot{
+.foot {
   bottom: 0;
 }
 
@@ -90,8 +92,8 @@ body,
   left: 0;
   z-index: -100;
 }
-.blue-div{
-  background-color: rgb(66,122,161, 0.3);
+.blue-div {
+  background-color: rgb(66, 122, 161, 0.3);
   max-width: 900px;
   display: flex;
   flex-wrap: wrap;
@@ -102,19 +104,21 @@ body,
 }
 .section-title {
   /* deleted this from service panel */
-  font-family: 'Pacifico', cursive;
+  font-family: "Pacifico", cursive;
   color: var(--orange);
 }
-.section-title h2{
+.section-title h2 {
   font-size: 40px;
 }
 #contact {
-  height:90vh;
+  height: 90vh;
 }
 .icon {
-  display:inline;
+  display: inline;
 }
-#contact_div, #contact_div a, #contact_div img {
+#contact_div,
+#contact_div a,
+#contact_div img {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -122,36 +126,36 @@ body,
 .project-side {
   flex-direction: column;
   margin-right: auto;
-    margin-left: auto;
+  margin-left: auto;
 }
 .project-tags {
   flex-wrap: wrap;
   margin-right: auto;
-    margin-left: auto;
-  flex-direction:row;
+  margin-left: auto;
+  flex-direction: row;
   float: right;
 }
 
-@media screen and (max-width: 480px){
-  .signature h1{
+@media screen and (max-width: 480px) {
+  .signature h1 {
     font-size: 80px;
     margin-left: -20px;
   }
-  .signature h2{ 
+  .signature h2 {
     font-size: 30px;
     margin-left: -75px;
   }
-  .project-side{
-    width:100%;
+  .project-side {
+    width: 100%;
     flex-direction: row;
   }
-  .project-side img{
+  .project-side img {
     width: 50%;
   }
   .project-tags {
     margin-right: auto;
     margin-left: auto;
-    flex-direction:column;
+    flex-direction: column;
     float: right;
   }
   #contact {
