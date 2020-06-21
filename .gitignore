@@ -105,3 +105,6 @@ dist
 
 src/vehicles-test.json
 
+build/
+src/private.js
+src/cors.js
