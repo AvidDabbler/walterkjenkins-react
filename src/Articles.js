@@ -46,7 +46,7 @@ class Articles extends Component {
 	render() {
 		const { loading, blogData } = this.state;
 		return (
-			<div id="idk">
+			<div>
 				<a href='https://blog.walterkjenkins.com' className='center tc section-title no-underline underline-hover'>
 					<h2 className="center tc section-title mt0">Blog</h2>
 				</a>

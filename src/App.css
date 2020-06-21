@@ -119,6 +119,18 @@ body,
   align-items: center;
   justify-content: center;
 }
+.project-side {
+  flex-direction: column;
+  margin-right: auto;
+    margin-left: auto;
+}
+.project-tags {
+  flex-wrap: wrap;
+  margin-right: auto;
+    margin-left: auto;
+  flex-direction:row;
+  float: right;
+}
 
 @media screen and (max-width: 480px){
   .signature h1{
@@ -128,5 +140,21 @@ body,
   .signature h2{ 
     font-size: 30px;
     margin-left: -75px;
+  }
+  .project-side{
+    width:100%;
+    flex-direction: row;
+  }
+  .project-side img{
+    width: 50%;
+  }
+  .project-tags {
+    margin-right: auto;
+    margin-left: auto;
+    flex-direction:column;
+    float: right;
+  }
+  #contact {
+    height: 300px;
   }
 }

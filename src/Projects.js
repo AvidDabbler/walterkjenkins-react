@@ -61,7 +61,7 @@ class Projects extends Component {
 
     tags(tags) {
         return tags.map(tag => (
-            <div className="center space-between white mh1 dib fl helvetica">
+            <div className="project-tags white mh1 dib fl helvetica">
                 <p className="dib f7 br-pill ph2 pv1 mb1 dib white bg-orange">{tag}</p>
             </div>))
 };
@@ -70,19 +70,19 @@ class Projects extends Component {
         let data = this.state.projectData;
         let filtered = data.filter(el => el.front == true);
         return filtered.map(el => (
-            <div id={el.name} className="w-100 flex flex-row blue-div br3 ma3 pa4">
-                <div className=" white helvetica tl w-75 flex flex-column mr1">
+            <div id={el.name} className="w-100 flex flex-row blue-div br3 mb3 pa3">
+                <div className=" white helvetica tl w-100 w-75-m w-75-l flex flex-column mr1">
                         <h3 className="mt0 mb1">{el.publicName}</h3>
                         <p className="mt0">{el.desc}</p>
                 </div>
-                <div className='w-20 flex flex-column ml2'>
+                <div className='project-side center w-20 flex ml2'>
                     <img src={el.language}></img>
-                    <div className="flex flex-wrap">
+                    <div className="project-tags flex">
                         {this.tags(el.tags)}
                     </div>
                 </div>
                 <a href={"https://github.com/AvidDabbler/" + el.name}>
-                    <p className="white center no-underline underline-hover">Continue to repo...</p>
+                    <p className="white no-underline underline-hover">Continue to repo...</p>
                 </a>
             </div>
         ))
@@ -92,7 +92,7 @@ class Projects extends Component {
         const { loading, projectData } = this.state;
         console.log(this.state);
         return (
-            <div className='tc section-title w-90'>
+            <div className='tc section-title w-100'>
                 <h2 className='center tc section-title mt0'>Projects</h2>
                 <div id='projects-list' className="">
                     {loading ? <h2>Still loading</h2> : this.renderProjects()}
