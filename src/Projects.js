@@ -1,8 +1,4 @@
 import React, { Component } from 'react';
-import { updatedRepos } from './data';
-import { mapStyle } from './private';
-import { cors_noDate } from './cors';
-import repos from './repos.json';
 import PY from './assets/python.svg';
 import JS from './assets/javascript.svg';
 

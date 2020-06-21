@@ -2,6 +2,7 @@
 import React, { Component, Fragment } from 'react';
 
 // css
+import './tachyons.min.css';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './App.css';
 
@@ -17,7 +18,7 @@ import { mbToken, mapStyle } from './private';
 import { cors } from './cors';
 
 // images
-import  DataLogo, { ReactComponent } from './assets/data.svg';
+import  DataLogo from './assets/data.svg';
 import  MapLogo from './assets/map.svg';
 import ProcessingLogo from './assets/tools.svg';
 import Github from './assets/github.svg';
@@ -28,22 +29,10 @@ import Linkedin from './assets/linkedin2.svg';
 import Articles from './Articles';
 import Projects from './Projects';
 
-
-
-
 // !!! NOTES !!!
 // preprocessing .proto files and working with pbf -> https://gavinr.com/protocol-buffers-protobuf-browser/
 // processing cors errors -> https://daveceddia.com/access-control-allow-origin-cors-errors-in-react-express/
 // import and load svg's -> https://blog.logrocket.com/how-to-use-svgs-in-react/
-
-// NAV
-// // todo: add in header
-
-// MAP
-// // todo: set up interval to refetch
-	// // todo: have to set up add every 15 seconds
-// // todo: figure out how to pan and zoom on click
-// // todo: disable pan and zoom
 
 // BLOG
 // // todo: get blog data to fetch
@@ -90,6 +79,7 @@ class BackgroundMap extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			loaded: false,
 			lng: -90.280318,
 			lat: 38.6447868,
 			zoom: 10.9,
@@ -108,7 +98,7 @@ class BackgroundMap extends Component {
 			interactive: false,
 		}
 		this.map = new mapboxgl.Map(mapOptions);
-		this.getAndLoad();	
+		this.getAndLoad();
 
 	};
 	
@@ -250,9 +240,9 @@ const RenderSect = () => {
 	ser.forEach((a) =>{
 		list.push(
 			// issue with icon div height and width
-			<div className='center tc white blue-div br3 flex flex-column section-title w-100 w-60-m w-30-l pa2 mv3'>
-				<img src={a.icon} alt={a.name} data-credit={a.credit} className='center flex icon pa3 center v-mid inline w-40'></img>
-				<h2 className='center tc pa0 ma0 white'>{a.name}</h2>
+			<div className='center tc white blue-div br3 flex flex-column  w-100 w-60-m w-30-l pa2 mv3'>
+				<img src={a.icon} alt={a.name} data-credit={a.credit} className='center section-title flex icon pa3 center v-mid inline w-40'></img>
+				<h2 className='center tc pa0 ma0 section-title white'>{a.name}</h2>
 				<p className='center tc mv3 helvetica white'>{a.desc}</p>
 			</div>
 		)
@@ -290,7 +280,7 @@ const App = () => (
 		
 		<Signature />
 		
-		<div id="services" className="blue-div br3 pa4 flex w-80 w-70-m flex-row space-around center v-mid mb4">
+		<div id="services" className="center blue-div br3 pa4 flex w-80 w-70-m flex-row center v-mid h6 justify-around mb4">
 			<RenderSect />
 		</div>
 
@@ -298,11 +288,11 @@ const App = () => (
 			<Articles />
 		</div>
 
-		<div id='projects' className="center blue-div br3 pa4 flex w-80 w-70-m flex-row  center v-mid h6 justify-around mb4">
+		<div id='projects' className="center blue-div br3 pa4 flex w-80 w-70-m flex-row center v-mid h6 justify-around mb4">
 			<Projects />
 		</div>
 
-		<div id='contact' className="center blue-div br3 pa4 flex w-80 w-70-m flex-row center v-mid h6 mb4">
+		<div id='contact' className="center blue-div br3 pa4 flex w-80 w-70-m flex-row center v-mid h6 justify-around mb4">
 			<Contact />
 		</div>
 

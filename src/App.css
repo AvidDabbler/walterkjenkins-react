@@ -1,11 +1,122 @@
+
 :root{
   --light-blue: #427aa1;
   --white: #ebf2fa;
-  --medium-blue: #1d3461;
+  --medium-blue: #0f1b3d;
   --orange: #f06543;
   --dark-blue: #0a122a
 }
-body{
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+
+#root {
+  height: 100vh;
+  width: 100%;
+}
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+    margin: 0;
+    padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+html,
+body,
+#app {
+  height: 100%;
+}
+#head, #foot {
+  position: absolute;
+  background-color: rgba(26, 48, 63, 0.8);
+}
+.link {
+  color: var(--orange);
+  font-family: Helvetica, sans-serif
+}
+.h60{
+  height: 60px;
+}
+.zi99{
+  z-index: 99;
+}
+.zi100{
+  z-index: 100;
+}
+.signature h1{
+  font-family: 'Pacifico', cursive;
+  padding: 0 0 0 20px;
+  margin: 0;
+  color: var(--orange);
+  text-shadow: -2px -2px 0 #213D50, 2px -2px 0 #213D50, -2px 2px 0 #213D50, 2px 2px 0 #213D50;
+}
+.signature{
+  top: 250px;
+  padding-left: 20px;
+  height: 100vh;
+  position: relative;
+}
+.signature h2{ 
+  font-family: 'Pacifico', cursive;
+  padding: 15px 0 0 120px;
+  margin: 0;
+  color: var(--white);
+  text-shadow: -2px -2px 0 #213D50, 2px -2px 0 #213D50, -2px 2px 0 #213D50, 2px 2px 0 #213D50;
+}
+.foot{
+  bottom: 0;
 }
 
+body,
+.mapContainer,
+.mapboxgl-canvas-container,
+.mapboxgl-canvas,
+.mapboxgl-canvas {
+  display: absolute;
+  height: 100%;
+  height: 100%;
+}
+#title {
+  z-index: 10000;
+}
+#map {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -100;
+}
+.blue-div{
+  background-color: rgb(66,122,161, 0.3);
+  max-width: 900px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.services {
+  flex: 0 1 24%;
+  height: 25%;
+}
+.section-title {
+  /* deleted this from service panel */
+  font-family: 'Pacifico', cursive;
+  color: var(--orange);
+}
+.section-title h2{
+  font-size: 40px;
+}
+#contact {
+  height:90vh;
+}
+.icon {
+  display:inline;
+}
+#contact_div, #contact_div a, #contact_div img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
