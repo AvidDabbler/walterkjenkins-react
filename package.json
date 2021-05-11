@@ -14,7 +14,7 @@
     "http-proxy": "^1.18.1",
     "js-yaml": "^3.14.0",
     "json-loader": "^0.5.7",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "mapbox": "^1.0.0-beta10",
     "mapbox-gl": "^1.11.0",
     "pbf": "^3.2.1",
