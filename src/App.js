@@ -1,8 +1,7 @@
 // react
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
 // css
-import './tachyons.min.css';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './App.css';
 
